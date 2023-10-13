@@ -1,4 +1,6 @@
 os
 dotenv
 transformers
-
+langchain
+requests
+streamlit
