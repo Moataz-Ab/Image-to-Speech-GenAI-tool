@@ -19,12 +19,20 @@ def image_to_text(image_url):
 #llm
 def text_to_story(text, model='gpt-3.5-turbo-instruct-0914', temperature=0.9):
     llm = OpenAI(openai_api_key=OPENAI_KEY, model=model, temperature=temperature))
-    template = '''
-    You are a talented story teller who can create a story from a simple narrative./
-    Create a story using the following scenario; the story should have be maximum 20 words long.
-    context = {scenario}
+    prompt = PromptTemplate(
+        input_variables = ['text'],
+        template = '''
+        You are a talented story teller who can create a story from a simple narrative./
+        Create a story using the following scenario; the story should have be maximum 20 words long.
+        context = {scenario}
+        '''
+        )
+    chain = LLMChain(llm=llm, prompt=prompt)
+    story = chain.predict(text=text)
 
-    '''
+    print('story')
+    return story
+
 
 
 # text to speech
