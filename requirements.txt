@@ -1,0 +1,4 @@
+os
+dotenv
+transformers
+
