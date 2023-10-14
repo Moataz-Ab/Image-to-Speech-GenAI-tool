@@ -27,7 +27,7 @@ Execution is devided into 3 parts:
 
 # Using the app
 
-- Before using the app the user shoudl have personal toeks for Hugging Face and Open AI
+- Before using the app, the user should have personal toeks for Hugging Face and Open AI
 - The user should save the personal tokens in an ".env" file within the package under object names HUGGINGFACE_TOKEN and OPENAI_TOKEN
 - The user can then run the app using the command: streamlin run app.py
 - Once the app is running on streamlit, the user can upload the target image
