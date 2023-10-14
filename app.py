@@ -52,9 +52,9 @@ def story_to_speech(story):
 def main():
 
     st.set_page_config(page_title= "IMAGE TO STORY CONVERTER", page_icon= "🖼️") #title
-    st.header("This tool tells a short story about the context shown in an image. Please upload your image below.")
+    st.header("Image-to-Story converter")
     #file uploader
-    file_upload = st.file_uploader("upload an image here [jpg files only]", type="jpg")
+    file_upload = st.file_uploader("please upload a jpg image here", type="jpg")
     #save file
     if file_upload is not None:
         try:
