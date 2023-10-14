@@ -1,8 +1,7 @@
 # Image-to-Speech-GenAI-tool
 
-WIP
-
 An AI tool that receives an image and uses generative AI to create a narrated short story in an audio file about the context of the image.
+
 The tool utilizes Hugging Face Transformers open-source framework for deep learning in combination with OpenAI prompting via Langchain framework.
 
 ![](audio-img/app-snapshot.jpg)
