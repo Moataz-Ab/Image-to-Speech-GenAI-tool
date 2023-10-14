@@ -43,7 +43,7 @@ def story_to_speech(story):
     headers = {"Authorization": f'Bearer {HUGGINGFACE_KEY}'}
     payload = {"inputs": story}
     response = requests.post(API_URL, headers=headers, json=payload)
-    with open('audio/story_speech.flac', 'wb') as file:
+    with open('audio-img/story_speech.flac', 'wb') as file:
         file.write(response.content)
 
 
@@ -59,7 +59,7 @@ def main():
     if file_upload is not None:
         try:
             image_bytes = file_upload.getvalue()
-            with open(f'audio/{file_upload.name}', "wb") as file:
+            with open(f'audio-img/{file_upload.name}', "wb") as file:
                 file.write(image_bytes)
             #display image
             st.image(file_upload, caption = "Uploaded image")
