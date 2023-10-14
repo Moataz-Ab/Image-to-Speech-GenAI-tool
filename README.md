@@ -10,11 +10,11 @@ The tool utilizes Hugging Face Transformers open-source framework for deep learn
 
 Execution is devided into 3 parts:
 - **Image to text:**   
-  an image-to-text transformer model ([Salesforce/blip-image-captioning-base](https://huggingface.co/Salesforce/blip-image-captioning-base)) is used to generate a scenario based on the on the AI understanding of the image context
+  an image-to-text transformer model ([Salesforce/blip-image-captioning-base](https://huggingface.co/Salesforce/blip-image-captioning-base)) is used to generate a text scenario based on the on the AI understanding of the image context
 - **Text to story:**   
   OpenAI LLM model is prompted to create a short story based on the generated scenario
 - **Story to speech:**   
-  a text-to-speech transformer model ([espnet/kan-bayashi_ljspeech_vits](https://huggingface.co/espnet/kan-bayashi_ljspeech_vits)) is used to convert the generated short story into an narrated audio file
+  a text-to-speech transformer model ([espnet/kan-bayashi_ljspeech_vits](https://huggingface.co/espnet/kan-bayashi_ljspeech_vits)) is used to convert the generated short story into a voice-narrated audio file
 
 # requirements
 
