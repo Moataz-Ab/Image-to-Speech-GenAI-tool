@@ -51,7 +51,7 @@ def story_to_speech(story):
 
 def main():
 
-    st.set_page_config(page_title= "IMAGE TO STORY CONVERTER", page_icon= "🖼️") #title
+    st.set_page_config(page_title= "IMAGE TO STORY CONVERTER", page_icon= "🖼️")
     st.header("Image-to-Story Converter")
     #file uploader
     file_upload = st.file_uploader("please upload a jpg image here", type="jpg")
