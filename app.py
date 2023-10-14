@@ -25,7 +25,7 @@ def text_to_story(text, model='gpt-3.5-turbo-instruct-0914', temperature=0.9):
         input_variables = ['text'],
         template = '''
         You are a talented story teller who can create a story from a simple narrative./
-        Create a story using the following scenario; the story should have be maximum 20 words long.
+        Create a story using the following scenario; the story should have be maximum 30 words long.
         context = {text}
         '''
         )
@@ -43,10 +43,48 @@ def story_to_speech(story):
     headers = {"Authorization": f'Bearer {HUGGINGFACE_KEY}'}
     payload = {"inputs": story}
     response = requests.post(API_URL, headers=headers, json=payload)
-    with open('story_speech.flac', 'wb') as file:
+    with open('audio/story_speech.flac', 'wb') as file:
         file.write(response.content)
 
 
-text = image_to_text("img/test_image1.jpg")
-story = text_to_story(text)
-speech = story_to_speech(story)
+# user interface
+
+def main():
+
+    st.set_page_config(page_title= "IMAGE TO STORY CONVERTER", page_icon= "🖼️") #title
+    st.header("This tool tells a short story about the context shown in an image. Please upload your image below.")
+    #file uploader
+    file_upload = st.file_uploader("upload an image here [jpg files only]", type="jpg")
+    #save file
+    if file_upload is not None:
+        try:
+            image_bytes = file_upload.getvalue()
+            with open(f'audio/{file_upload.name}', "wb") as file:
+                file.write(image_bytes)
+            #display image
+            st.image(file_upload, caption = "Uploaded image")
+            #run functions
+            file_name = file_upload.name
+            text = image_to_text(f'audio-img/{file_name}')
+            if text:
+                story = text_to_story(text)
+                with st.expander('Generated image scenario'):
+                        st.write(text)
+                if story:
+                    story_to_speech(story)
+                    with st.expander('Generated short story'):
+                        st.write(story)
+                    st.audio('audio-img/story_speech.flac')
+                else:
+                    st.error("Failed to generate a story from the text.")
+            else:
+                st.error("Failed to generate a text from the image.")
+
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+    else:
+        st.warning("Please upload an image to generate a story.")
+
+
+if __name__ == '__main__':
+    main()
