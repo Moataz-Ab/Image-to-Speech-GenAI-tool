@@ -12,6 +12,15 @@ OPENAI_KEY = os.getenv('OPENAI_TOKEN')
 #img to text
 
 def image_to_text(image_url):
+    """
+    Generates context text from image using image-to-text transformer model.
+
+    Parameters:
+        image_url (str): URL of the image to be processed.
+
+    Returns:
+        str: Context text.
+    """
     pipe = pipeline("image-to-text", model="Salesforce/blip-image-captioning-base")
     text = pipe(image_url)[0]['generated_text']
     print(text)
@@ -20,6 +29,17 @@ def image_to_text(image_url):
 
 #llm
 def text_to_story(text, model='gpt-3.5-turbo-instruct-0914', temperature=0.9):
+    """
+    Generates a short story based on input text by prompting OpenAI's language model.
+
+    Args:
+        text (str): Input text used as context for generating the story.
+        model (str): OpenAI model to be used for story generation. Defaults to 'gpt-3.5-turbo-instruct-0914'.
+        temperature (float): Controls the randomness of the generated story. Defaults to 0.9.
+
+    Returns:
+        str: Generated short story based on the input context.
+    """
     llm = OpenAI(openai_api_key=OPENAI_KEY, model=model, temperature=temperature)
     prompt = PromptTemplate(
         input_variables = ['text'],
@@ -39,6 +59,12 @@ def text_to_story(text, model='gpt-3.5-turbo-instruct-0914', temperature=0.9):
 
 # text to speech
 def story_to_speech(story):
+    """
+    Generates and saves an audio file of speech narrating the short story using a text-to-speech tranformer model.
+
+    Args:
+        story (str): Short story to be converted to speech.
+    """
     API_URL = 'https://api-inference.huggingface.co/models/espnet/kan-bayashi_ljspeech_vits'
     headers = {"Authorization": f'Bearer {HUGGINGFACE_KEY}'}
     payload = {"inputs": story}
@@ -50,7 +76,9 @@ def story_to_speech(story):
 # user interface
 
 def main():
-
+    """
+    Main function to run the Streamlit user interface for the Image-to-Story App.
+    """
     st.set_page_config(page_title= "IMAGE TO STORY CONVERTER", page_icon= "🖼️")
     st.header("Image-to-Story Converter")
     #file uploader
